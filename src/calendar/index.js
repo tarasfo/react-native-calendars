@@ -195,6 +195,7 @@ class Calendar extends Component {
     while (days.length) {
       weeks.push(this.renderWeek(days.splice(0, 7), weeks.length));
     }
+    alert('weeks: ' + JSON.stringify(weeks))
     let indicator;
     const current = parseDate(this.props.current);
     if (current) {
