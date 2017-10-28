@@ -24,6 +24,11 @@ class CalendarHeader extends Component {
     this.style = styleConstructor(props.theme);
     this.addMonth = this.addMonth.bind(this);
     this.substractMonth = this.substractMonth.bind(this);
+    this.toggleMode = this.toggleMode.bind(this)
+  }
+
+  toggleMode(){
+    this.props.toggleMode();
   }
 
   addMonth() {
@@ -89,7 +94,7 @@ class CalendarHeader extends Component {
         </TouchableOpacity>
       );
       rightControl = (
-        <TouchableOpacity onPress={this.props.toggleMode()} style={this.style.arrow}>
+        <TouchableOpacity onPress={this.toggleMode} style={this.style.arrow}>
           {this.props.renderArrow
             ? this.props.renderArrow('right')
             : <Image

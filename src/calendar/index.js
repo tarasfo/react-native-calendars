@@ -64,7 +64,9 @@ class Calendar extends Component {
     //Disable days by default. Default = false
     disabledByDefault: PropTypes.bool,
     //Month or week mode. If week then week with 'current' || new Date() will be displayed. Default = 'month'
-    mode: PropTypes.string
+    mode: PropTypes.string,
+    // Replace default controls with custom ones (direction can be 'left' or 'right')
+    renderControl: PropTypes.func,
   };
 
   constructor(props) {
@@ -85,6 +87,7 @@ class Calendar extends Component {
     this.addMonth = this.addMonth.bind(this);
     this.pressDay = this.pressDay.bind(this);
     this.shouldComponentUpdate = shouldComponentUpdate;
+    this.toggleMode = this.toggleMode.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -134,6 +137,7 @@ class Calendar extends Component {
   }
 
   toggleMode(){
+    alert(this.state.mode && this.state.mode === 'week')
     if(this.state.mode && this.state.mode === 'week'){
       this.setState({mode: 'month'});
     }
@@ -241,6 +245,7 @@ class Calendar extends Component {
           monthFormat={this.props.monthFormat}
           hideDayNames={this.props.hideDayNames}
           toggleMode={this.toggleMode}
+          renderControl={this.props.renderControl}
         />
         {weeks}
       </View>);
