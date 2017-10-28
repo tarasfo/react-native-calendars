@@ -62,7 +62,9 @@ class Calendar extends Component {
     //Hide day names. Default = false
     hideDayNames: PropTypes.bool,
     //Disable days by default. Default = false
-    disabledByDefault: PropTypes.bool
+    disabledByDefault: PropTypes.bool,
+    //Month or week mode. If week then week with 'current' || new Date() will be displayed. Default = 'month'
+    mode: PropTypes.string
   };
 
   constructor(props) {
@@ -192,10 +194,21 @@ class Calendar extends Component {
     //console.log('render calendar ');
     const days = dateutils.page(this.state.currentMonth, this.props.firstDay);
     const weeks = [];
-    while (days.length) {
-      weeks.push(this.renderWeek(days.splice(0, 7), weeks.length));
+    if(this.props.mode && this.props.mode === 'week'){
+      let cur = this.props.current || new Date();
+      while (days.length) {
+        let w = days.splice(0, 7)
+        if(w.some(d=>{
+          return dateutils.sameDate(d, parseDate(cur))
+        })) {
+          weeks.push(this.renderWeek(w, weeks.length));
+        }
+      }
+    } else {
+      while (days.length) {
+        weeks.push(this.renderWeek(days.splice(0, 7), weeks.length));
+      }
     }
-    alert('weeks: ' + JSON.stringify(weeks))
     let indicator;
     const current = parseDate(this.props.current);
     if (current) {
