@@ -134,7 +134,12 @@ class Calendar extends Component {
   }
 
   toggleMode(){
-
+    if(this.state.mode && this.state.mode === 'week'){
+      this.setState({mode: 'month'});
+    }
+    if(this.state.mode && this.state.mode === 'month'){
+      this.setState({mode: 'week'});
+    }
   }
 
   renderDay(day, id) {
@@ -235,6 +240,7 @@ class Calendar extends Component {
           renderArrow={this.props.renderArrow}
           monthFormat={this.props.monthFormat}
           hideDayNames={this.props.hideDayNames}
+          toggleMode={this.toggleMode}
         />
         {weeks}
       </View>);

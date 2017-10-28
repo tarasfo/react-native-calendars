@@ -16,6 +16,7 @@ class CalendarHeader extends Component {
     firstDay: PropTypes.number,
     renderArrow: PropTypes.func,
     hideDayNames: PropTypes.bool,
+    toggleMode: PropTypes.func,
   };
 
   constructor(props) {
@@ -88,7 +89,7 @@ class CalendarHeader extends Component {
         </TouchableOpacity>
       );
       rightControl = (
-        <TouchableOpacity onPress={()=>{}} style={this.style.arrow}>
+        <TouchableOpacity onPress={this.props.toggleMode()} style={this.style.arrow}>
           {this.props.renderArrow
             ? this.props.renderArrow('right')
             : <Image
