@@ -64,8 +64,31 @@ class CalendarHeader extends Component {
               />}
         </TouchableOpacity>
       );
+      leftControl = (
+        <TouchableOpacity
+          onPress={()=>{}}
+          style={this.style.arrow}
+        >
+          {this.props.renderArrow
+            ? this.props.renderArrow('left')
+            : <Image
+                source={require('../img/previous.png')}
+                style={this.style.arrowImage}
+              />}
+        </TouchableOpacity>
+      );
       rightArrow = (
         <TouchableOpacity onPress={this.addMonth} style={this.style.arrow}>
+          {this.props.renderArrow
+            ? this.props.renderArrow('right')
+            : <Image
+                source={require('../img/next.png')}
+                style={this.style.arrowImage}
+              />}
+        </TouchableOpacity>
+      );
+      rightControl = (
+        <TouchableOpacity onPress={()=>{}} style={this.style.arrow}>
           {this.props.renderArrow
             ? this.props.renderArrow('right')
             : <Image
@@ -82,6 +105,7 @@ class CalendarHeader extends Component {
     return (
       <View>
         <View style={this.style.header}>
+          {leftControl}
           {leftArrow}
           <View style={{ flexDirection: 'row' }}>
             <Text style={this.style.monthText}>
@@ -90,6 +114,7 @@ class CalendarHeader extends Component {
             {indicator}
           </View>
           {rightArrow}
+          {rightControl}
         </View>
         {
           !this.props.hideDayNames &&
