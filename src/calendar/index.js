@@ -77,7 +77,8 @@ class Calendar extends Component {
       currentMonth = XDate();
     }
     this.state = {
-      currentMonth
+      currentMonth,
+      mode: props.mode
     };
 
     this.updateMonth = this.updateMonth.bind(this);
@@ -130,6 +131,10 @@ class Calendar extends Component {
 
   addMonth(count) {
     this.updateMonth(this.state.currentMonth.clone().addMonths(count, true));
+  }
+
+  toggleMode(){
+
   }
 
   renderDay(day, id) {
@@ -194,7 +199,7 @@ class Calendar extends Component {
     //console.log('render calendar ');
     const days = dateutils.page(this.state.currentMonth, this.props.firstDay);
     const weeks = [];
-    if(this.props.mode && this.props.mode === 'week'){
+    if(this.state.mode && this.state.mode === 'week'){
       let cur = this.props.current || new Date();
       while (days.length) {
         let w = days.splice(0, 7)
