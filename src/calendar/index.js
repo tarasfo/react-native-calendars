@@ -126,8 +126,11 @@ class Calendar extends Component {
       if (shouldUpdateMonth) {
         this.updateMonth(day);
       }
-      if (this.props.onDayPress) {
-        this.props.onDayPress(xdateToData(day));
+      if(this.state.mode !== 'week'){
+        this.toggleMode();
+        if (this.props.onDayPress) {
+          this.props.onDayPress(xdateToData(day));
+        }
       }
     }
   }
@@ -138,7 +141,6 @@ class Calendar extends Component {
   }
 
   toggleMode(){
-    // alert(this.state.mode && this.state.mode === 'week')
     if(this.state.mode && this.state.mode === 'week'){
       this.setState({mode: 'month'});
     }
@@ -245,7 +247,7 @@ class Calendar extends Component {
       }
     }
     return (
-      <View style={[this.style.container, this.props.style, {height: 60 + weeks.length * (isNaN(this.props.theme.weekHeight) ? 46 : this.props.theme.weekHeight )}]} onLayout={this.props.onLayout}>
+      <View style={[this.style.container, this.props.style, {height: 72 + weeks.length * (isNaN(this.props.theme.weekHeight) ? 46 : this.props.theme.weekHeight )}]} onLayout={this.props.onLayout}>
         <CalendarHeader
           theme={this.props.theme}
           hideArrows={this.props.hideArrows}
