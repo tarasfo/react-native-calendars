@@ -14,10 +14,10 @@ export default function getStyle(theme={}) {
       // height: 100,
     },
     week: {
-      marginTop: 7,
-      marginBottom: 7,
+      marginTop: isNaN(appStyle.weekMarginTop) ? 7 :  appStyle.weekMarginTop,
+      marginBottom: isNaN(appStyle.weekMarginBottom) ? 7 :  appStyle.weekMarginBottom,
       flexDirection: 'row',
-      justifyContent: 'space-around'
+      justifyContent: 'space-around',
     },
     ...(theme[STYLESHEET_ID] || {})
   });
