@@ -6,11 +6,12 @@ const STYLESHEET_ID = 'stylesheet.calendar.header';
 export default function(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
+    weekBackground:  appStyle.weekBackground,
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingLeft: 10,
-      paddingRight: 10,
+      paddingLeft: appStyle.paddingLeft || 10,
+      paddingRight: appStyle.paddingRight || 10,
       alignItems: 'center'
     },
     monthText: {
@@ -31,12 +32,24 @@ export default function(theme={}) {
         android: {
           tintColor: appStyle.arrowColor
         }
-      })
+      }), 
+    },
+    controlImage: {
+      ...Platform.select({
+        ios: {
+          tintColor: appStyle.arrowColor
+        },
+        android: {
+          tintColor: appStyle.arrowColor
+        }
+      }), 
+      width: 15,
+      height: 15,
     },
     week: {
       marginTop: 7,
       flexDirection: 'row',
-      justifyContent: 'space-around'
+      justifyContent: 'space-around',
     },
     dayHeader: {
       marginTop: 2,
@@ -45,7 +58,7 @@ export default function(theme={}) {
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,
-      color: appStyle.textSectionTitleColor
+      color: appStyle.textSectionTitleColor,
     },
     ...(theme[STYLESHEET_ID] || {})
   });

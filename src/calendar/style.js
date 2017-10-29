@@ -7,8 +7,8 @@ export default function getStyle(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     container: {
-      paddingLeft: 5,
-      paddingRight: 5,
+      paddingLeft: isNaN(appStyle.paddingLeft) ? 5 :  appStyle.paddingLeft,
+      paddingRight: isNaN(appStyle.paddingRight) ? 5 :  appStyle.paddingRight,
       flex: 1,
       backgroundColor: appStyle.calendarBackground
     },
