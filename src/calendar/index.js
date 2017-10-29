@@ -65,6 +65,8 @@ class Calendar extends Component {
     disabledByDefault: PropTypes.bool,
     //Month or week mode. If week then week with 'current' || new Date() will be displayed. Default = 'month'
     mode: PropTypes.string,
+    //onLayout event
+    onLayout: PropTypes.func,
   };
 
   constructor(props) {
@@ -217,6 +219,17 @@ class Calendar extends Component {
           weeks.push(this.renderWeek(w, weeks.length));
         }
       }
+      if(weeks.length === 0){
+        const days = dateutils.page(parseDate(cur), this.props.firstDay);
+        while (days.length) {
+          let w = days.splice(0, 7)
+          if(w.some(d=>{
+            return dateutils.sameDate(d, parseDate(cur))
+          })) {
+            weeks.push(this.renderWeek(w, weeks.length));
+          }
+        }
+      }
     } else {
       while (days.length) {
         weeks.push(this.renderWeek(days.splice(0, 7), weeks.length));
@@ -232,7 +245,7 @@ class Calendar extends Component {
       }
     }
     return (
-      <View style={[this.style.container, this.props.style]}>
+      <View style={[this.style.container, this.props.style, {height: 60 + weeks.length * 46}]} onLayout={this.props.onLayout}>
         <CalendarHeader
           theme={this.props.theme}
           hideArrows={this.props.hideArrows}

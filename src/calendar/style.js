@@ -9,8 +9,9 @@ export default function getStyle(theme={}) {
     container: {
       paddingLeft: isNaN(appStyle.paddingLeft) ? 5 :  appStyle.paddingLeft,
       paddingRight: isNaN(appStyle.paddingRight) ? 5 :  appStyle.paddingRight,
-      flex: 1,
-      backgroundColor: appStyle.calendarBackground
+      // flex: 1,
+      backgroundColor: appStyle.calendarBackground,
+      // height: 100,
     },
     week: {
       marginTop: 7,
