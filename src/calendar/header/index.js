@@ -89,7 +89,8 @@ class CalendarHeader extends Component {
         );
       } else {
         leftControl = (
-          null
+          //null
+          <View style={this.style.header}></View>
         );
       }
       rightArrow = (
@@ -118,7 +119,8 @@ class CalendarHeader extends Component {
         );
       } else {
         rightControl = (
-          null
+          //null
+          <View style={this.style.header}></View>
         );
       }
     }
