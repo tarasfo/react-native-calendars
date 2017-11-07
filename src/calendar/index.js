@@ -128,9 +128,9 @@ class Calendar extends Component {
       }
       if(this.state.mode !== 'week'){
         this.toggleMode();
-        if (this.props.onDayPress) {
-          this.props.onDayPress(xdateToData(day));
-        }
+      }
+      if (this.props.onDayPress) {
+        this.props.onDayPress(xdateToData(day));
       }
     }
   }

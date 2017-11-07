@@ -62,7 +62,7 @@ class CalendarHeader extends Component {
     let leftControl = <View />;
     let rightControl = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
-    if (!this.props.hideArrows) {
+    if (this.props.mode !== 'week' && !this.props.hideArrows) {
       leftArrow = (
         <TouchableOpacity
           onPress={this.substractMonth}
@@ -76,23 +76,7 @@ class CalendarHeader extends Component {
               />}
         </TouchableOpacity>
       );
-      if(this.props.mode){
-        leftControl = (
-          <TouchableOpacity
-            onPress={()=>{}}
-            style={this.style.arrow}
-          >
-            {this.props.renderArrow
-              ? this.props.renderArrow('left')
-              : null}
-          </TouchableOpacity>
-        );
-      } else {
-        leftControl = (
-          //null
-          <View style={this.style.header}></View>
-        );
-      }
+      
       rightArrow = (
         <TouchableOpacity onPress={this.addMonth} style={this.style.arrow}>
           {this.props.renderArrow
@@ -103,27 +87,45 @@ class CalendarHeader extends Component {
               />}
         </TouchableOpacity>
       );
-      if(this.props.mode){
-        rightControl = (
-          <TouchableOpacity onPress={this.toggleMode} style={this.style.arrow}>
-            {this.props.mode === 'week'
-              ? <Image
-                  source={require('../img/expand.png')}
-                  style={this.style.controlImage}
-                />
-              : <Image
-                  source={require('../img/collapse.png')}
-                  style={this.style.controlImage}
-                />}
-          </TouchableOpacity>
-        );
-      } else {
-        rightControl = (
-          //null
-          <View style={this.style.header}></View>
-        );
-      }
     }
+    if(this.props.mode){
+      leftControl = (
+        <TouchableOpacity
+          onPress={()=>{}}
+          style={this.style.arrow}
+        >
+          {this.props.renderArrow
+            ? this.props.renderArrow('left')
+            : null}
+        </TouchableOpacity>
+      );
+    } else {
+      leftControl = (
+        //null
+        <View style={this.style.header}></View>
+      );
+    }
+    if(this.props.mode){
+      rightControl = (
+        <TouchableOpacity onPress={this.toggleMode} style={this.style.arrow}>
+          {this.props.mode === 'week'
+            ? <Image
+                source={require('../img/expand.png')}
+                style={this.style.controlImage}
+              />
+            : <Image
+                source={require('../img/collapse.png')}
+                style={this.style.controlImage}
+              />}
+        </TouchableOpacity>
+      );
+    } else {
+      rightControl = (
+        //null
+        <View style={this.style.header}></View>
+      );
+    }
+    
     let indicator;
     if (this.props.showIndicator) {
       indicator = <ActivityIndicator />;
